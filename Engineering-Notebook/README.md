@@ -1,0 +1,1 @@
+The Engineering Notebook seeks to document my decision making over the course of the project, organized primarily by time. My goal is to add Jupyter notebooks as I go to document new developments and try out ideas in code form.

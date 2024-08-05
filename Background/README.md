@@ -1,0 +1,1 @@
+The Background section contains literature review about different aspects of the project.
