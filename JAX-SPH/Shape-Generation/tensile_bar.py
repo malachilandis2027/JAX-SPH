@@ -1,15 +1,15 @@
 import jax
 import jax.numpy as jnp
 
-def get_tensile_bar_numbers(grip_width:            float,
-                            grip_length:           float,
-                            gage_width:            float,
-                            gage_length:           float,
-                            thickness:             float,
-                            fillet_major_diameter: float,
-                            fillet_minor_diameter: float,
-                            ideal_spacing:         float
-                            ) -> jnp.array:
+def generate_tensile_bar_indices(grip_width:            float,
+                                 grip_length:           float,
+                                 gage_width:            float,
+                                 gage_length:           float,
+                                 thickness:             float,
+                                 fillet_major_diameter: float,
+                                 fillet_minor_diameter: float,
+                                 ideal_spacing:         float
+                                 ) -> jnp.array:
     # just to get the coordinates straight, (0,0,0) is in the middle of the gage section, middle of the thickness
     # the y axis is pointing vertically along the tensile direction
 
@@ -99,15 +99,15 @@ def get_tensile_bar_numbers(grip_width:            float,
     return jnp.concatenate([xyzswht_lower_grip,xyzswht_lower_fillet,xyzswht_gage,xyzswht_upper_fillet,xyzswht_upper_grip],axis=0) # xyzswht_upper_grip
 
 @jax.jit
-def get_tensile_bar_positions(grip_width:            float,
-                              grip_length:           float,
-                              gage_width:            float,
-                              gage_length:           float,
-                              thickness:             float,
-                              fillet_major_diameter: float,
-                              fillet_minor_diameter: float,
-                              xyzswht:               jnp.array
-                              ) -> jnp.array:
+def generate_tensile_bar_positions(grip_width:            float,
+                                   grip_length:           float,
+                                   gage_width:            float,
+                                   gage_length:           float,
+                                   thickness:             float,
+                                   fillet_major_diameter: float,
+                                   fillet_minor_diameter: float,
+                                   xyzswht:               jnp.array
+                                   ) -> jnp.array:
     fillet_center_x = fillet_minor_diameter/2 + gage_width/2
     fillet_center_y = gage_length/2
     fillet_length = ((1 - (grip_width/2 - fillet_minor_diameter/2 - gage_width/2)**2 / (fillet_minor_diameter/2)**2) * (fillet_major_diameter/2)**2)**0.5

@@ -1,0 +1,1 @@
+This folder contains details about my implementation, including a style guide.
